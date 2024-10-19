@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Return Asset</title>
+</head>
+<body>
+    <h1>Return Asset: {{ asset.name }}</h1>
+    
+    <p>Are you sure you want to mark the asset "{{ asset.name }}" as returned?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, Return Asset</button>
+        <a href="{% url 'asset_list' %}">Cancel</a>
+    </form>
+</body>
+</html>
