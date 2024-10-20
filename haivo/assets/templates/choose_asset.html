@@ -1,0 +1,20 @@
+<h1>Select Asset for {{ employee.name }}</h1>
+<form method="POST">
+    {% csrf_token %}
+    <select name="asset">
+        {% for asset in assets %}
+        <option value="{{ asset.id }}">
+            {{ asset.name }}
+        </option>
+        {% endfor %}
+    </select>
+    <button type="submit">Borrow Asset</button>
+</form>
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}

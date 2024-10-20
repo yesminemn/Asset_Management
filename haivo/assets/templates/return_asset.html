@@ -1,19 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Return Asset</title>
-</head>
-<body>
-    <h1>Return Asset: {{ asset.name }}</h1>
-    
-    <p>Are you sure you want to mark the asset "{{ asset.name }}" as returned?</p>
+<h1>You Already Have This Asset</h1>
+<p>D you want to return {{ asset.name }}?</p>
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Return Asset</button>
+</form>
+<form action="{% url 'choose_asset' employee.id %}" method="GET" style="display:inline;">
+    <button type="submit">Cancel</button>
+</form>
 
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Yes, Return Asset</button>
-        <a href="{% url 'asset_list' %}">Cancel</a>
-    </form>
-</body>
-</html>
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
